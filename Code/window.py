@@ -1,7 +1,13 @@
 from .jsonloading import loadjson as lj, writejson as wj
 import pygame as pg
 
+# windowClass handles the window for the program as well as all the key/mouse inputs
+# this input information is stored in attributes as dictionaries, making accessing the values very simple in higher levels of the code
+# it essentially takes some functionality from pygame that I need and puts it into an object that I can use easily
 class windowClass:
+    # in initialization, all the important attributes are created and assigned default values
+    # filename determines where the dictionary for the keys are taken from
+    # the dictionaries are given indexes by iterating through lists with literal values in for loops
     def __init__(self, filename = "keys"):
         self.screenMode = [(1920, 1080), pg.FULLSCREEN]
         self.screen = pg.display.set_mode(*self.screenMode)
@@ -18,6 +24,8 @@ class windowClass:
             self.mouse[item] = 0
         self.mouse['list'] = []
 
+    # processing refreshes the screen window and packages all the event input so it can be accessed easily through the object
+    # this function needs to run every frame in a while loop so that the screen refreshes and all the inputs are accurate
     def processing(self):
         for key in self.input:
             if key[-1] == "T":
@@ -54,8 +62,11 @@ class windowClass:
 
         pg.display.flip()
 
+    # this just makes the function .display.set_caption() more accessible
     def rename(self, name):
         pg.display.set_caption(name)
 
+    # its a bit cheeky, but I use this if statement as the condition for the while loop of the program
+    # the purpose is so that I can close it by holding shift and pressing escape
     def isRunning(self):
         return not (self.input["shift"] and self.input["escapeT"])
