@@ -13,6 +13,8 @@ class windowClass:
         self.screen = pg.display.set_mode(*self.screenMode)
         self.input = {}
         self.mouse = {}
+        self.clock = pg.time.Clock()
+        self.tick = 0
 
         self.keyData = lj(filename)
         for num in self.keyData:
@@ -27,6 +29,7 @@ class windowClass:
     # processing refreshes the screen window and packages all the event input so it can be accessed easily through the object
     # this function needs to run every frame in a while loop so that the screen refreshes and all the inputs are accurate
     def processing(self):
+        self.tick = self.clock.tick(120)
         for key in self.input:
             if key[-1] == "T":
                 self.input[key] = 0

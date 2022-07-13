@@ -7,10 +7,19 @@ window.rename("Pong")
 player = paddleClass()
 enemy = paddleClass("NPC")
 ball = ballClass()
+gameState = "idle"
 
 while window.isRunning():
     window.processing()
-    window.screen.fill((70, 60, 150))
-    ball.render(window)
-    player.render(window)
-    enemy.render(window, ball)
+    window.screen.fill((50, 70, 140))
+    if window.input["spaceT"]:
+        if gameState == "idle":
+            gameState = "play"
+        elif gameState == "play":
+            gameState = "idle"
+            ball.reset()
+            player.reset()
+            enemy.reset()
+    ball.render(window, gameState)
+    player.render(window, ball, gameState)
+    enemy.render(window, ball, gameState)
