@@ -34,12 +34,12 @@ class windowClass:
             if key[-1] == "T":
                 self.input[key] = 0
         for event in pg.event.get():
-            if event.type == pg.KEYDOWN and str(event.key) in self.keyData:
-                key = self.keyData[str(event.key)]
+            if event.type == pg.KEYDOWN:
+                key = pg.key.name(event.key)
                 self.input[key] = 1
                 self.input[key + "T"] = 1
-            if event.type == pg.KEYUP and str(event.key) in self.keyData:
-                key = self.keyData[str(event.key)]
+            if event.type == pg.KEYUP:
+                key = pg.key.name(event.key)
                 self.input[key] = 0
             if event.type == pg.VIDEORESIZE and not self.screenMode[1] == pg.FULLSCREEN:
                 self.screenMode = [(event.w, event.h), pg.RESIZABLE]
@@ -72,4 +72,4 @@ class windowClass:
     # its a bit cheeky, but I use this if statement as the condition for the while loop of the program
     # the purpose is so that I can close it by holding shift and pressing escape
     def isRunning(self):
-        return not (self.input["shift"] and self.input["escapeT"])
+        return not (self.input["left shift"] and self.input["escapeT"])
