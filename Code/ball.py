@@ -38,9 +38,9 @@ class ballClass:
             if self.x < 130 or self.x > 1790 and self.timer > 50:
                 self.direction = math.pi - self.direction
                 self.timer = 0
-                if self.x < 100:
+                if self.x < 130:
                     self.x = 130
-                if self.x > 1820:
+                if self.x > 1790:
                     self.x = 1790
             if self.y < -30 or self.y > 1120:
                 self.offscreen = True
