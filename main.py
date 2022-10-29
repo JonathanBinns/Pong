@@ -13,11 +13,13 @@ enemy = paddleClass("NPC")
 ball = ballClass()
 gameState = "pause"
 scoreDelay = 0
+defaultColor = (50, 70, 140)
+window.color = defaultColor
 
 # the while loop is simple, differentiating between each of the gamestates through elif blocks
 while window.isRunning():
     window.processing()
-    window.screen.fill((50, 70, 140))
+    window.screen.fill(window.color)
     if gameState == "pause":
         if window.input["spaceT"]:
             gameState = "play"
@@ -25,6 +27,7 @@ while window.isRunning():
         if ball.offscreen:
             gameState = "score"
             scoreDelay = 0
+            window.color = defaultColor
     elif gameState == "score":
         scoreDelay += window.tick
         if scoreDelay > 1000:

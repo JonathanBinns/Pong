@@ -60,6 +60,8 @@ class paddleClass:
     def collisionHandler(self, window, ball):
         self.collisionTimer += window.tick
         if ball.rect.colliderect(self.rect) and self.collisionTimer > 800:
+            if window.color[2] > 10:
+                window.color = (window.color[0] + 3, window.color[1] - 1, window.color[2] - 3)
             difference = self.x - ball.x
             random_skew = randint(-40, 40)
             if self.type == "player":
@@ -69,5 +71,5 @@ class paddleClass:
             else:
                 ball.direction = math.pi / 2 + (difference + random_skew) / 230
             if ball.speed < 200:
-                ball.speed *= 1.035
+                ball.speed *= 1.0333
             self.collisionTimer = 0
